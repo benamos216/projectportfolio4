@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from CUTS import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.get_supplier, name='get_supplier'),
+    path('add_supplier', views.add_supplier, name='add_supplier'),
+    path('edit_supplier/<supplier_id>', views.edit_supplier, name='edit_supplier'),
+    path('delete_supplier/<supplier_id>', views.delete_supplier, name='delete_supplier'),
 ]
