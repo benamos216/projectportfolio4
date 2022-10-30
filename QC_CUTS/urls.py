@@ -23,4 +23,8 @@ urlpatterns = [
     path('add_supplier', views.add_supplier, name='add_supplier'),
     path('edit_supplier/<supplier_id>', views.edit_supplier, name='edit_supplier'),
     path('delete_supplier/<supplier_id>', views.delete_supplier, name='delete_supplier'),
+    path('get_ranges/<supplier_id>', views.get_ranges, name='get_ranges'),
+    path('add_range', views.add_range, name='add_range'),
+    path('edit_range/<range_id>', views.edit_range, name='edit_range'),
+    path('delete_range/<range_id>', views.delete_range, name='delete_range'),
 ]
