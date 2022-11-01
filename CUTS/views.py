@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Supplier, Range, Cut
-from .forms import SupplierForm, RangeForm
+from .models import Supplier, Range, Roll, Cut
+from .forms import SupplierForm, RangeForm, RollForm
 
 # Create your views here.
 
@@ -85,4 +85,45 @@ def edit_range(request, range_id):
 def delete_range(request, range_id):
     ranges = get_object_or_404(Range, id=range_id)
     ranges.delete()
+    return redirect('get_supplier')
+
+
+def get_rolls(request, range_id):
+    range = get_object_or_404(Range, id=range_id)
+    rolls = Roll.objects.filter(ranges=range_id)
+    context = {
+        'rolls': rolls
+    }
+    return render(request, "rolls.html", context)
+
+def add_roll(request):
+    if request.method == "POST":
+        form = RollForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('get_supplier')
+    form = RollForm()
+    context = {
+        'form': form
+    }
+    return render(request, "add_roll.html", context)
+
+
+def edit_roll(request, roll_id):
+    rolls = get_object_or_404(Roll, id=roll_id)
+    if request.method == "POST":
+        form = RollForm(request.POST, instance=rolls)
+        if form.is_valid():
+            form.save()
+            return redirect('get_supplier')
+    form = RollForm(instance=rolls)
+    context = {
+        'form': form
+    }
+    return render(request, 'edit_roll.html', context)
+
+
+def delete_roll(request, roll_id):
+    rolls = get_object_or_404(Roll, id=roll_id)
+    rolls.delete()
     return redirect('get_supplier')
