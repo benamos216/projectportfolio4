@@ -48,7 +48,7 @@ def delete_supplier(request, supplier_id):
 
 def get_ranges(request, supplier_id):
     supplier = get_object_or_404(Supplier, id=supplier_id)
-    ranges = Range.objects.all()
+    ranges = Range.objects.filter(supplier=supplier_id)
     context = {
         'ranges': ranges
     }

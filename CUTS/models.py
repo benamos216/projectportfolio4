@@ -11,7 +11,7 @@ class Supplier (models.Model):
 
 
 class Range (models.Model):
-    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
+    supplier = models.ForeignKey('Supplier', related_name='Supplier', on_delete=models.CASCADE)
     ranges = models.CharField(max_length=50, null=False, blank=False)
 
     def __str__(self):
